@@ -29,6 +29,8 @@ class IndexController extends Controller
 
 
 //        dd(DB::getConnections());
+
+        dd('dd');
         return DB::table('posts')->get();
         return Tenant::all();
     }

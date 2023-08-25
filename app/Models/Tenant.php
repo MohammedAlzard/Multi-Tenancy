@@ -9,5 +9,5 @@ class Tenant extends Model
 {
     use HasFactory;
 
-//    protected $table = 'tenants';
+    protected $table = 'tenants';
 }
