@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Console\Commands\Tenants;
+namespace App\Console\Commands\System;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 
-class SystemMigrateCommand extends Command
+class SeederCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'system:migrate';
+    protected $signature = 'system:seeder {class}';
 
     /**
      * The console command description.
@@ -26,9 +26,14 @@ class SystemMigrateCommand extends Command
      */
     public function handle()
     {
-        $this->info('start migrating LandLord SYSTEM');
+        $class = $this->argument('class');
+//        dd($class);
+        $this->info('start seeding LandLord SYSTEM');
         $this->info('----------------------------------');
-        Artisan::call('migrate --path=database/migrations/system/ --database=system');
+        Artisan::call('db:seed', [
+            '--class' => 'Database\\Seeders\\System\\'.$class,
+            '--database' => 'system'
+        ]);
         $this->info(Artisan::output());
         return Command::SUCCESS;
     }

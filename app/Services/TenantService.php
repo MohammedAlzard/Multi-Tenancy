@@ -35,7 +35,7 @@ class TenantService
         self::$database = $tenant->database;
     }
 
-    public static function switchToDefalut(Tenant $tenant)
+    public static function switchToDefalut()
     {
         DB::purge('system');
         DB::purge('tenant');

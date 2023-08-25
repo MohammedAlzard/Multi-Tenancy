@@ -22,6 +22,7 @@ class TenantsMiddleware
         $host = $request->getHost();
         $tenant = Tenant::where('domain', $host)->first();
 
+        // Step 1
         /*if (!empty($tenant)) {
             DB::purge('system');
             Config::set('database.connections.tenant.database', $tenant->database);
@@ -30,8 +31,16 @@ class TenantsMiddleware
             DB::setDefaultConnection('tenant');
         }*/
 
-        // Code 2
-        TenantService::switchToTenant($tenant);
+
+        // Step 2
+//        TenantService::switchToTenant($tenant);
+
+        // Step 3
+        if (!empty($tenant)) {
+            TenantService::switchToTenant($tenant);
+        }else{
+            TenantService::switchToDefalut();
+        }
 
         return $next($request);
     }
